@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>hentai.tools</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <div class="logo">hentai<span>.tools</span></div>
+    <nav>
+      <button class="nav-btn active" data-tab="search">Suche</button>
+      <button class="nav-btn" data-tab="tags">Tag Browser</button>
+      <button class="nav-btn" data-tab="random">Random</button>
+      <button class="nav-btn" data-tab="downloader">Downloader</button>
+      <button class="nav-btn" data-tab="favorites">Favoriten</button>
+    </nav>
+  </header>
+
+  <main>
+    <!-- SEARCH TAB -->
+    <section id="tab-search" class="tab active">
+      <h2>Erweiterte Suche</h2>
+      <div class="search-box">
+        <input type="text" id="search-input" placeholder="Tags, Titel, Autor eingeben..." />
+        <button id="search-btn">Suchen</button>
+      </div>
+      <div class="filters">
+        <label>Kategorie:
+          <select id="filter-category">
+            <option value="">Alle</option>
+            <option value="manga">Manga</option>
+            <option value="doujinshi">Doujinshi</option>
+            <option value="artbook">Artbook</option>
+            <option value="western">Western</option>
+          </select>
+        </label>
+        <label>Sprache:
+          <select id="filter-lang">
+            <option value="">Alle</option>
+            <option value="japanese">Japanisch</option>
+            <option value="english">Englisch</option>
+            <option value="german">Deutsch</option>
+            <option value="chinese">Chinesisch</option>
+          </select>
+        </label>
+        <label>Sortierung:
+          <select id="filter-sort">
+            <option value="popular">Beliebtheit</option>
+            <option value="recent">Neueste</option>
+            <option value="random">Zufällig</option>
+          </select>
+        </label>
+        <label>Tags ausschließen:
+          <input type="text" id="exclude-tags" placeholder="z.B. ntr, netorare" />
+        </label>
+      </div>
+      <div class="tag-chips" id="active-tags"></div>
+      <div class="results-grid" id="search-results">
+        <div class="placeholder-card">
+          <div class="card-thumb">?</div>
+          <div class="card-info"><strong>Beispieltitel 1</strong><span>Doujinshi · EN</span></div>
+        </div>
+        <div class="placeholder-card">
+          <div class="card-thumb">?</div>
+          <div class="card-info"><strong>Beispieltitel 2</strong><span>Manga · JP</span></div>
+        </div>
+        <div class="placeholder-card">
+          <div class="card-thumb">?</div>
+          <div class="card-info"><strong>Beispieltitel 3</strong><span>Artbook · EN</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TAG BROWSER TAB -->
+    <section id="tab-tags" class="tab">
+      <h2>Tag Browser</h2>
+      <div class="tag-search-box">
+        <input type="text" id="tag-search" placeholder="Tag suchen..." />
+      </div>
+      <div class="tag-categories">
+        <div class="tag-group">
+          <h3>Kategorien</h3>
+          <div class="tag-list" id="tag-list-categories">
+            <span class="tag">manga</span>
+            <span class="tag">doujinshi</span>
+            <span class="tag">artbook</span>
+            <span class="tag">western</span>
+          </div>
+        </div>
+        <div class="tag-group">
+          <h3>Beliebte Tags</h3>
+          <div class="tag-list" id="tag-list-popular">
+            <span class="tag" data-count="12500">big breasts</span>
+            <span class="tag" data-count="9800">school uniform</span>
+            <span class="tag" data-count="8700">glasses</span>
+            <span class="tag" data-count="7600">maid</span>
+            <span class="tag" data-count="6500">kemonomimi</span>
+            <span class="tag" data-count="5400">tsundere</span>
+            <span class="tag" data-count="4800">kuudere</span>
+            <span class="tag" data-count="4200">sister</span>
+            <span class="tag" data-count="3900">idol</span>
+            <span class="tag" data-count="3600">elf</span>
+            <span class="tag" data-count="3200">witch</span>
+            <span class="tag" data-count="2900">catgirl</span>
+          </div>
+        </div>
+        <div class="tag-group">
+          <h3>Sprachen</h3>
+          <div class="tag-list" id="tag-list-lang">
+            <span class="tag lang">japanese</span>
+            <span class="tag lang">english</span>
+            <span class="tag lang">german</span>
+            <span class="tag lang">chinese</span>
+            <span class="tag lang">korean</span>
+            <span class="tag lang">french</span>
+          </div>
+        </div>
+      </div>
+      <div class="selected-tags-panel">
+        <h3>Ausgewählte Tags <button id="clear-tags">Leeren</button></h3>
+        <div id="selected-tags-display"></div>
+        <button id="search-with-tags" class="primary-btn">Mit diesen Tags suchen</button>
+      </div>
+    </section>
+
+    <!-- RANDOM TAB -->
+    <section id="tab-random" class="tab">
+      <h2>Random Generator</h2>
+      <p class="tab-desc">Lass dich überraschen – generiere zufällige Inhalte basierend auf deinen Filtern.</p>
+      <div class="random-controls">
+        <div class="random-filter">
+          <label>Kategorie:
+            <select id="random-category">
+              <option value="any">Beliebig</option>
+              <option value="manga">Manga</option>
+              <option value="doujinshi">Doujinshi</option>
+              <option value="artbook">Artbook</option>
+            </select>
+          </label>
+          <label>Sprache:
+            <select id="random-lang">
+              <option value="any">Beliebig</option>
+              <option value="japanese">Japanisch</option>
+              <option value="english">Englisch</option>
+            </select>
+          </label>
+          <label>Tags ausschließen:
+            <input type="text" id="random-exclude" placeholder="z.B. guro, scat" />
+          </label>
+        </div>
+        <button id="random-btn" class="primary-btn big-btn">🎲 Zufällig!</button>
+      </div>
+      <div class="random-result" id="random-result">
+        <div class="random-placeholder">Klicke auf "Zufällig!" um zu starten</div>
+      </div>
+      <div class="random-history" id="random-history">
+        <h3>Verlauf</h3>
+        <div id="random-history-list"></div>
+      </div>
+    </section>
+
+    <!-- DOWNLOADER TAB -->
+    <section id="tab-downloader" class="tab">
+      <h2>Gallery Downloader</h2>
+      <p class="tab-desc">Gib eine Gallery-URL ein um alle Bilder herunterzuladen.</p>
+      <div class="downloader-box">
+        <input type="text" id="dl-url" placeholder="https://..." />
+        <button id="dl-analyze-btn">Analysieren</button>
+      </div>
+      <div class="dl-options" id="dl-options" style="display:none">
+        <label><input type="checkbox" id="dl-all" checked> Alle Bilder</label>
+        <label>Format:
+          <select id="dl-format">
+            <option value="zip">ZIP Archiv</option>
+            <option value="cbz">CBZ (Comic)</option>
+            <option value="pdf">PDF</option>
+          </select>
+        </label>
+        <label>Dateiname:
+          <input type="text" id="dl-filename" placeholder="Dateiname..." />
+        </label>
+        <button id="dl-start-btn" class="primary-btn">Download starten</button>
+      </div>
+      <div class="dl-progress" id="dl-progress" style="display:none">
+        <div class="progress-bar-wrap">
+          <div class="progress-bar" id="dl-progress-bar"></div>
+        </div>
+        <span id="dl-progress-text">0%</span>
+      </div>
+      <div class="dl-log" id="dl-log"></div>
+
+      <div class="dl-batch">
+        <h3>Batch Download</h3>
+        <textarea id="dl-batch-input" placeholder="Mehrere URLs, eine pro Zeile..."></textarea>
+        <button id="dl-batch-btn" class="primary-btn">Batch starten</button>
+      </div>
+    </section>
+
+    <!-- FAVORITES TAB -->
+    <section id="tab-favorites" class="tab">
+      <h2>Favoriten</h2>
+      <div class="fav-controls">
+        <input type="text" id="fav-search" placeholder="Favoriten durchsuchen..." />
+        <select id="fav-sort">
+          <option value="added">Hinzugefügt</option>
+          <option value="title">Titel</option>
+          <option value="rating">Bewertung</option>
+        </select>
+        <button id="fav-export-btn">Exportieren</button>
+        <button id="fav-import-btn">Importieren</button>
+      </div>
+      <div class="fav-collections">
+        <h3>Sammlungen</h3>
+        <div id="collections-list">
+          <div class="collection active" data-id="all">Alle <span class="fav-count" id="fav-total">0</span></div>
+        </div>
+        <button id="new-collection-btn" class="small-btn">+ Neue Sammlung</button>
+      </div>
+      <div class="fav-grid" id="fav-grid">
+        <div class="fav-empty">Noch keine Favoriten gespeichert.<br>Füge Inhalte über die Suche hinzu.</div>
+      </div>
+
+      <div class="fav-add-manual">
+        <h3>Manuell hinzufügen</h3>
+        <input type="text" id="fav-manual-url" placeholder="URL eingeben..." />
+        <input type="text" id="fav-manual-title" placeholder="Titel..." />
+        <button id="fav-manual-add" class="primary-btn">Hinzufügen</button>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <span>hentai.tools · Nur für Erwachsene (18+)</span>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
