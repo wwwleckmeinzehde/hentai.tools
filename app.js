@@ -1,5 +1,24 @@
 'use strict';
 
+// ─── AGE VERIFICATION ─────────────────────────────────────────────────────────
+(function () {
+  const gate = document.getElementById('age-gate');
+
+  if (sessionStorage.getItem('ht_age_ok') === '1') {
+    gate.classList.add('hidden');
+    return;
+  }
+
+  document.getElementById('age-yes').addEventListener('click', () => {
+    sessionStorage.setItem('ht_age_ok', '1');
+    gate.classList.add('hidden');
+  });
+
+  document.getElementById('age-no').addEventListener('click', () => {
+    window.location.href = 'https://cactusmod.xyz';
+  });
+})();
+
 // TAB NAVIGATION
 document.querySelectorAll('.nav-btn').forEach(btn => {
   btn.addEventListener('click', () => {
